@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE" th:text="#{page.title}">The Page Title</title>
+
+<meta charset="UTF-8" />
+<meta th:each="metatag : ${metatags}" th:name="${metatag.name}" th:content="${metatag.content}" />
+
+<link rel="shortcut icon" type="image/x-icon" media="all" href="/favicon.ico" th:href="@{/favicon.ico}" />
+<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" href="../../static/css/style.css" />
+<link rel="stylesheet" type="text/css" media="screen" th:href="@{/webjars/bootswatch-united/3.3.4+1/css/bootstrap.min.css}"
+  href="http://cdn.jsdelivr.net/webjars/bootswatch-united/3.3.4+1/css/bootstrap.min.css" />
+</head>
+
+<body>
+  <div th:replace="fragments/header :: header">The Header</div>
+
+  <div class="spacer50"></div>
+
+  <div th:if="${header}" th:class="h1" th:text="#{${header}}">Header</div>
+
+  <ul class="breadcrumb" th:unless="${#lists.isEmpty(breadcrumbs)}">
+    <li th:each="breadcrumb : ${breadcrumbs}">
+      <a th:if="${breadcrumb.href}" href="#" th:href="@{${breadcrumb.href}}" th:text="#{${breadcrumb.text}}">Breadcrumb</a>
+      <span th:unless="${breadcrumb.href}" th:text="#{${breadcrumb.text}}" th:remove="tag">Breadcrumb</span>
+    </li>
+  </ul>
+
+  <div layout:fragment="content" class="container-fluid">
+    <h1>Static content for prototyping purposes only</h1>
+  </div>
+
+  <div th:replace="fragments/footer :: footer">The Footer</div>
+  
+  <div th:replace="fragments/javascript :: jsConfig">JavaScript config</div>
+  <div th:replace="fragments/javascript :: jsImports">JavaScript imports</div>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html layout:decorator="layout/page" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<title th:text="#{${title}}">The Home Title</title>
+</head>
+
+<body>
+  <div layout:fragment="content">
+    <form action="#" th:action="@{/account/signup}" th:object="${signupCommand}" method="post" class="form-horizontal">
+
+      <div class="form-group" th:if="${#fields.hasGlobalErrors()}">
+        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}" th:class="text-danger">Global errors</p>
+      </div>
+
+      <div class="form-group" th:classappend="${#fields.hasErrors('username')} ? has-error">
+        <label th:for="${#ids.next('username')}" th:text="#{account.signup.username.label}" class="sr-only">Username</label>
+        <input type="text" class="form-control" th:field="*{username}" th:placeholder="#{account.signup.username.placeholder}" required="required" autofocus="autofocus" th:pattern="${regexUsernamePattern}" th:title="#{Pattern.username}" />
+        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:class="text-danger">Invalid username</p>
+      </div>
+      <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? has-error">
+        <label th:for="${#ids.next('email')}" th:text="#{account.signup.email.label}" class="sr-only">Email</label>
+        <input type="email" class="form-control" th:field="*{email}" th:placeholder="#{account.signup.email.placeholder}" required="required" th:pattern="${regexEmailPattern}" th:title="#{Pattern.email}" />
+        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:class="text-danger">Invalid email</p>
+      </div>
+      <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? has-error">
+        <label th:for="${#ids.next('password')}" th:text="#{account.signup.password.label}" class="sr-only">Password</label>
+        <input type="password" class="form-control" th:field="*{password}" th:placeholder="#{account.signup.password.placeholder}" required="required" th:pattern="${regexPasswordPattern}" th:title="#{Pattern.password}" />
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:class="text-danger">Invalid password</p>
+      </div>
+      <div class="form-group" th:classappend="${#fields.hasErrors('repeatPassword')} ? has-error">
+        <label th:for="${#ids.next('repeatPassword')}" th:text="#{account.signup.repeatPassword.label}" class="sr-only">Repeat password</label>
+        <input type="password" class="form-control" th:field="*{repeatPassword}" th:placeholder="#{account.signup.repeatPassword.placeholder}" required="required" />
+        <p th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}" th:class="text-danger">Invalid repeatPassword</p>
+      </div>
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" th:field="*{accept}" required="required" th:title="#{AssertTrue.signupCommand.accept}" />
+            <span th:text="#{account.signup.accept.label}" th:remove="tag">Accept terms and conditions</span>
+          </label>
+          <p th:if="${#fields.hasErrors('accept')}" th:errors="*{accept}" th:class="text-danger">Invalid accept</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="form-control" th:text="#{account.signup.submit}">Submit</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

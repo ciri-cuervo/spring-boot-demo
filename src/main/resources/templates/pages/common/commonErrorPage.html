@@ -1,0 +1,31 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title th:text="#{msg.error.title}">Error</title>
+<meta charset="UTF-8" />
+<link rel="stylesheet" type="text/css" media="screen" href="http://cdn.jsdelivr.net/webjars/bootswatch-yeti/3.3.1+2/css/bootstrap.min.css"
+  th:href="@{/webjars/bootswatch-yeti/3.3.1+2/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" media="screen"
+  href="http://cdn.jsdelivr.net/webjars/bootswatch-yeti/3.3.1+2/css/bootstrap-theme.min.css"
+  th:href="@{/webjars/bootswatch-yeti/3.3.1+2/css/bootstrap-theme.min.css}" />
+<script type="text/javascript" src="http://cdn.jsdelivr.net/webjars/jquery/2.1.1/jquery.min.js"
+  th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
+<script type="text/javascript" src="http://cdn.jsdelivr.net/webjars/bootswatch-yeti/3.3.1+2/js/bootstrap.min.js"
+  th:src="@{/webjars/bootswatch-yeti/3.3.1+2/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2 th:text="#{msg.error.header}">Error</h2>
+    <div th:if="${!#strings.isEmpty(errorMsg)}" th:text="#{${errorMsg}}">The error message.</div>
+
+    <ul th:if="${!#lists.isEmpty(errors)}">
+      <li th:each="err : ${errors}" th:text="#{${err.code}(${err.arguments})}" th:class="text-danger">Errors</li>
+    </ul>
+  </div>
+
+</body>
+
+</html>

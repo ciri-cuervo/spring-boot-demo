@@ -1,0 +1,12 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:remove="all">Template for activation email</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <div th:with="activationUrl=${baseUrl + '/account/activation'}">
+      To activate your account please click <a th:href="@{${activationUrl}(hash=${hash})}">here</a>.
+    </div>
+  </body>
+</html>

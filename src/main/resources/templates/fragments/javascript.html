@@ -1,0 +1,23 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+  <script type="text/javascript" th:fragment="jsConfig" th:inline="javascript">
+  /*<![CDATA[*/
+    var JS = { config : {} };
+    JS.config.contextPath = /*[[@{/}]]*/ 'context path';
+  /*]]>*/
+  </script>
+
+<span th:fragment="jsImports" th:remove="tag">
+  <script type="text/javascript" th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"
+    src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootswatch-united/3.3.4+1/js/bootstrap.min.js}"
+    src="http://cdn.jsdelivr.net/webjars/bootswatch-united/3.3.4+1/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" th:src="@{/js/js_form.js}"
+    src="/static/js/js_form.js"></script>
+</span>
+
+</body>
+</html>
